@@ -1,0 +1,27 @@
+.container {
+  border: solid 1px red;
+}
+
+.blue {
+  border: solid 1px blue;
+}
+
+body {
+  font-family: 'Podkova';
+}
+
+input {
+  display: block;
+}
+
+.add-button {
+  margin-top: 10px;
+}
+
+.contact-info {
+  height: 100%;
+}
+
+.address-list {
+  margin-top: 15px;
+}
