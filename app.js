@@ -17,9 +17,9 @@ $(document).ready(function() {
         lastName: "Neighbor",
         phone: "123-123-1234",
         address: {
-          street: "123",
+          street: "123 Fake Street",
           city: "Small Town",
-          state: "Wisconson",
+          state: "Wisconsin",
         }
       },
       {
@@ -27,9 +27,9 @@ $(document).ready(function() {
         lastName: "Smith",
         phone: "456-456-1234",
         address: {
-          street: "456",
+          street: "456 Fake Street",
           city: "Small Town",
-          state: "Wisconson",
+          state: "Wisconsin",
         }
       },
       {
@@ -37,39 +37,42 @@ $(document).ready(function() {
         lastName: "Doe",
         phone: "789-789-7897",
         address: {
-          street: "789",
+          street: "789 Fake Street",
           city: "Small Town",
-          state: "Wisconson",
+          state: "Wisconsin",
         }
       }
-    ],
-    // $('.address.link').click(function(){
-    //     $('.contact-header').text(this)
-    //   })    
+    ]
+   
   };
   var AddContact = {
     addToList: function() {
       for(var i = 0; i < ContactsObj.contacts.length; i++) {
+        var fullName = ContactsObj.contacts[i].firstName + ContactsObj.contacts[i].lastName;
         $(".address-list").append(
-            '<li class="address-list-item"><a href="#" class="address-link ' +
+            '<li class="address-list-item address-link ' +
             ContactsObj.contacts[i].firstName +
             ContactsObj.contacts[i].lastName +
             '">' + 
             ContactsObj.contacts[i].firstName + ' ' + ContactsObj.contacts[i].lastName +
-            '</a></li>'
-        ).data(ContactsObj.contacts[i].firstName+ContactsObj.contacts[i].lastName,ContactsObj.contacts[i]);
+            '</li>'
+        );
+
+        $('.' + fullName).data('contact-info',ContactsObj.contacts[i]);
       };
     },
     addSingle: function() {
       var i = ContactsObj.contacts.length - 1;
+      var fullName = ContactsObj.contacts[i].firstName + ContactsObj.contacts[i].lastName;
       $(".address-list").append(
-            '<li class="address-list-item"><a href="#" class="address-link ' +
+            '<li class="address-list-item address-link ' +
             ContactsObj.contacts[i].firstName +
             ContactsObj.contacts[i].lastName +
             '">' + 
             ContactsObj.contacts[i].firstName + ' ' + ContactsObj.contacts[i].lastName +
-            '</a></li>'
+            '</li>'
         );
+      $('.' + fullName).data('contact-info',ContactsObj.contacts[i]);
     },
     addFromSubmit: $('.contact-form').submit(function(event){
       event.preventDefault();
@@ -88,7 +91,18 @@ $(document).ready(function() {
     })
   };
 
+  $('.address-list').on("click", 'li', function(){    
+    $('.contact-header').text($(this).data('contact-info').firstName + 
+      ' ' + $(this).data('contact-info').lastName);
+    $('.first-name-info').text($(this).data('contact-info').firstName);
+    $('.last-name-info').text($(this).data('contact-info').lastName);
+    $('.phone-info').text($(this).data('contact-info').phone);
+    $('.address-info').text($(this).data('contact-info').address.street + ', ' +
+      $(this).data('contact-info').address.city + ', ' +
+      $(this).data('contact-info').address.state);
+  });   
+
   AddContact.addToList();
-  // console.log($('.NextdoorNeighbor').data('NextdoorNeighbor').firstName);
-  console.log(ContactsObj.contacts)
+  console.log($('.NextdoorNeighbor').data('contact-info').firstName);
+  // console.log(ContactsObj.contacts)
 });
