@@ -17,3 +17,11 @@ input {
 .address-list {
   margin-top: 15px;
 }
+
+.address-list li {
+    color: #0645AD;
+}
+
+.address-list li:hover {
+    cursor: pointer;
+}
