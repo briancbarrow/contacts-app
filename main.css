@@ -25,3 +25,7 @@ input {
 .address-list li:hover {
     cursor: pointer;
 }
+
+.address-info {
+    list-style: none;
+}
